@@ -1,0 +1,84 @@
+---
+description: Guidelines for continuously improving Cursor rules based on emerging code patterns and best practices.
+globs: **/*
+alwaysApply: true
+---
+
+- **Rule Improvement Triggers:**
+  - New code patterns not covered by existing rules
+  - Repeated similar implementations across files
+  - Common error patterns that could be prevented
+  - New libraries or tools being used consistently
+  - Emerging best practices in the codebase
+
+- **Analysis Process:**
+  - Compare new code with existing rules
+  - Identify patterns that should be standardized
+  - Look for references to external documentation
+  - Check for consistent error handling patterns
+  - Monitor test patterns and coverage
+
+- **Rule Updates:**
+  - **Add New Rules When:**
+    - A new technology/pattern is used in 3+ files
+    - Common bugs could be prevented by a rule
+    - Code reviews repeatedly mention the same feedback
+    - New security or performance patterns emerge
+
+  - **Modify Existing Rules When:**
+    - Better examples exist in the codebase
+    - Additional edge cases are discovered
+    - Related rules have been updated
+    - Implementation details have changed
+
+- **Example Pattern Recognition:**
+  ```go
+  // If you see repeated Ent List patterns like:
+  func (r *xxxRepo) ListXxx(ctx context.Context, req *pagination.PagingRequest) (*pager.Paginator, error) {
+      whereCond, orderCond := entgo.QueryCommandToSelector(req)
+      query := r.data.db.Xxx.Query()
+      query.Modify(whereCond...)
+      query.Modify(orderCond...)
+      // ...
+  }
+  
+  // These patterns are already captured in [pgsql-schema-to-crud.mdc](mdc:.cursor/rules/pgsql-schema-to-crud.mdc)
+  // When a NEW repeated pattern emerges (3+ files), create a new rule following the same structure.
+  ```
+
+- **Existing Rules Reference:**
+  - [dev-preflight-check.mdc](mdc:.cursor/rules/dev-preflight-check.mdc) — **开发预检清单（alwaysApply，核心硬约束汇总）**
+  - [errx-error-handling.mdc](mdc:.cursor/rules/errx-error-handling.mdc) — 错误处理规范
+  - [proto-api-definition.mdc](mdc:.cursor/rules/proto-api-definition.mdc) — Proto API 定义规范
+  - [pgsql-schema-to-crud.mdc](mdc:.cursor/rules/pgsql-schema-to-crud.mdc) — Ent Schema → CRUD 规范
+  - [deploy-version-management.mdc](mdc:.cursor/rules/deploy-version-management.mdc) — 部署与版本管理规范
+  - [commit-conventions.mdc](mdc:.cursor/rules/commit-conventions.mdc) — 代码提交规范（提交范围、消息格式、任务同步）
+  - [testing-conventions.mdc](mdc:.cursor/rules/testing-conventions.mdc) — 测试规范（stub 桩模式、覆盖要求）
+  - [project-dev-guidelines/RULE.md](mdc:.cursor/rules/project-dev-guidelines/RULE.md) — 规则索引入口
+  - New rules should follow the same format: frontmatter (description, globs, alwaysApply) + concise DO/DON'T examples
+
+- **Rule Quality Checks:**
+  - Rules should be actionable and specific
+  - Examples should come from actual code
+  - References should be up to date
+  - Patterns should be consistently enforced
+
+- **Continuous Improvement:**
+  - Monitor code review comments
+  - Track common development questions
+  - Update rules after major refactors
+  - Add links to relevant documentation
+  - Cross-reference related rules
+
+- **Rule Deprecation:**
+  - Mark outdated patterns as deprecated
+  - Remove rules that no longer apply
+  - Update references to deprecated rules
+  - Document migration paths for old patterns
+
+- **Documentation Updates:**
+  - Keep examples synchronized with code
+  - Update references to external docs
+  - Maintain links between related rules
+  - Document breaking changes
+Follow [cursor_rules.mdc](mdc:.cursor/rules/cursor_rules.mdc) for proper rule formatting and structure.
