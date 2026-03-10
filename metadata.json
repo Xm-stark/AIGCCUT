@@ -1,0 +1,5 @@
+{
+  "name": "VideoGen Workflow",
+  "description": "An automated video generation system that converts scripts into videos with TTS, synced subtitles, and background music.",
+  "requestFramePermissions": []
+}

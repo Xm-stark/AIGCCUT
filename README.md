@@ -1,47 +1,20 @@
-# AIGC 视频混剪工具
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-自动生成短视频的 Python 工具，支持：
-- 文字转语音（edge-tts）
-- 视频混剪
-- 水印添加
-- 背景音乐合成
+# Run and deploy your AI Studio app
 
-## 安装依赖
+This contains everything you need to run your app locally.
 
-```bash
-pip install -r requirements.txt
-```
+View your app in AI Studio: https://ai.studio/apps/073b1dc6-9baa-4f5e-bcdc-dd0e210f03cc
 
-## 系统要求
+## Run Locally
 
-- Python 3.9+
-- FFmpeg（系统需安装）
+**Prerequisites:**  Node.js
 
-## 使用方法
 
-### FFmpeg 管道
-```bash
-python run_ffmpeg_pipeline.py
-```
-
-### VectCut 管道
-```bash
-python run_vectcut_pipeline.py
-```
-
-## 配置
-
-在脚本中修改以下路径：
-- `PHONE_DIR` - 手机素材目录
-- `INDOOR_DIR` - 室内素材目录
-- `BGM_DIR` - 背景音乐目录
-- `WATERMARK_PATH` - 水印路径
-- `OUTPUT_DIR` - 输出目录
-
-## 输出
-
-生成的视频保存在 `output/` 目录
-
-## License
-
-MIT
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
